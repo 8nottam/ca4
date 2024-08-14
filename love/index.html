@@ -10,7 +10,47 @@
 <body>
     <div class="wrapper">
         <!-- <img src="../thư love.png" alt=""> -->
-
+        <div class="formInput">
+            
+            <div class="boxHands">
+                <div class="handsCat">
+                    <img src="../image/handsCat.png" alt="">
+                </div>
+                <h1>Welcome</h1>
+            </div>
+            <div class="boxSlider">
+                    <div class="listSlider">
+                        <div class="slider">
+                            <img src="../image/0009.gif" alt="">
+                        </div>
+                        <div class="slider">
+                            <img src="../image/01.jpg" alt="">
+                        </div>
+                        <div class="slider">
+                            <img src="../image/02.jpg" alt="">
+                        </div>
+                        <div class="slider">
+                            <img src="../image/03.jpg" alt="">
+                        </div>
+                    </div>
+                <div class="left">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </div>
+                <div class="right">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+            <div class="boxHandsInput">
+                <div class="handsCatImgInput">
+                    <img src="../image/handsCat.png" alt="">
+                </div>
+                <input type="text" id="inputField" placeholder="Nhập tên..." readonly>
+            </div>
+            <div class="buttonLove">
+                <div class="cricleBtn"></div>
+                <div class="button"></div>
+            </div>
+        </div>
         <div class="boxLine">
             <div class="boxCar">
                 <img src="../image/car_V3.gif" alt="">
@@ -55,6 +95,27 @@
                 </div>
                 <div class="heartLetter">
                     <div class="heartLetterItem"></div>
+                </div>
+                
+                <div class="wrapperLetter">
+                    <div class="giftbox">
+                        <div class="img">
+                            <img src="../image/giftbox.png" alt="">
+                        </div>
+                    </div>
+                    <div class="textLetter">
+                        <h2></h2>
+                        <p class="contentLetter"></p>
+                        <div class="heartAnimation">
+                            <img src="../image/heartAnimation.gif" alt="">
+                        </div>
+                    </div>
+                    <div class="mewmew1">
+                        <img src="../image/mewmew.gif" alt="">
+                    </div>
+                    <div class="mewmew2">
+                        <img src="../image/mewmew.gif" alt="">
+                    </div>
                 </div>
             </div>
             <div class="before"></div>
@@ -156,6 +217,98 @@
         typeText();
     }, 11500)
     });
+
+    // .textLetter text h2
+    let indexText = 0;
+    let textLetter = document.querySelector('.textLetter h2');
+    const textLetterH2 = "Gửi cậu!";
+    let timoutTextLetter;
+
+    function textCharLetter(){
+        if (indexText < textLetterH2.length) {
+            textLetter.textContent += textLetterH2[indexText];
+            indexText++;
+            setTimeout(indexText, 100);
+        }
+        else{
+            clearInterval(timoutTextLetter);
+            setTimeout(()=>{
+                funcTimeoutLetterContent()
+            },500)
+        }
+    }
+    function funcTimeoutLetter(){
+        indexText = 0; // Reset indexText
+        textLetter.textContent = ''; // Xóa nội dung hiện tại của textLetter
+        clearInterval(timoutTextLetter);
+        timoutTextLetter =  setInterval(()=>{
+                textCharLetter();
+            }, 200)
+    }
+
+    // chữ của thư bạn muốn gửi
+    let indexTextContent = 0;
+    let textLetterContent = document.querySelector('.contentLetter');
+    // thay đổi lời chúc
+    const textLetterP = "HEHE. Mình cũng chẳng biết nói gì cả, mong rằng cái này sẽ làm cậu vui sau 1 ngày mệt mỏi, giờ thì hãy cười thật tươi lên nhé 😉 . YÊU CẬU ❤";
+    let timoutTextLetterContent;
+    function textCharLetterContent(){
+        if (indexTextContent < textLetterP.length) {
+            textLetterContent.textContent += textLetterP[indexTextContent];
+            indexTextContent++;
+            setTimeout(indexTextContent, 100);
+        }
+        else{
+            clearInterval(timoutTextLetterContent)
+
+        }
+    }
+    function funcTimeoutLetterContent(){
+        indexTextContent = 0; // Reset indexTextContent
+        textLetterContent.textContent = ''; // Xóa nội dung hiện tại của textLetter
+        clearInterval(timoutTextLetterContent);
+        timoutTextLetterContent =  setInterval(()=>{
+            textCharLetterContent();
+            }, 100)
+    }
+    //end 
+    document.querySelector(".boxSlider .right").addEventListener("click", function(){
+        var slider = document.querySelectorAll(".slider")
+        document.querySelector(".listSlider").appendChild(slider[0])
+    })
+    document.querySelector(".boxSlider .left").addEventListener("click", function(){
+        var slider = document.querySelectorAll(".slider")
+        document.querySelector(".listSlider").prepend(slider[slider.length -1])
+    })
+
+    document.querySelector(".buttonLove").addEventListener("click", function(){
+        let timeout = setInterval(()=>{
+            var letters = document.createElement("div");
+            letters.className = "letters"
+            letters.innerHTML = '<img src="../image/letters.png" alt="">';
+            document.querySelector("body").prepend(letters)
+            let left = Math.floor(Math.random() * 100);
+            let rotate = Math.floor(Math.random() * 360);
+            letters.style.left = left + "%";
+            letters.style.top = "-10%";
+            letters.style.transform = `rotate(${rotate}deg)`;
+            setTimeout(()=>{
+                letters.style.top = "100%";
+            },1000)
+            setTimeout(()=>{
+                letters.remove()
+            },11000)
+            document.querySelectorAll(".letters").forEach((item)=>{
+                item.addEventListener("click", function(){
+                    clearInterval(timeout)
+                    $(".wrapperLetterForm").fadeIn()
+                    funcTimeoutLetter();
+                    
+                })
+            })
+        },500)
+    })
+
     document.querySelector(".fa-xmark").addEventListener("click", function(){
         indexTextContent = 0; // Reset indexTextContent
         textLetterContent.textContent = ''; // Xóa nội dung hiện tại của textLetter
